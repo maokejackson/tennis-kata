@@ -1,9 +1,9 @@
 package com.dtxmaker.kata.tennis;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TennisGameTest
 {
@@ -183,7 +183,7 @@ public class TennisGameTest
         assertEquals("Advantage Receiver", game.getScore());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void test_S4R1_GameOver() throws Exception
     {
         TennisGame game = new TennisGame();
@@ -191,10 +191,12 @@ public class TennisGameTest
         game.serverScores();
         game.serverScores();
         game.serverScores();
-        game.receiverScores();
+
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::receiverScores);
+        assertEquals("Game over", thrown.getMessage());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void test_R4S1_GameOver() throws Exception
     {
         TennisGame game = new TennisGame();
@@ -202,6 +204,8 @@ public class TennisGameTest
         game.receiverScores();
         game.receiverScores();
         game.receiverScores();
-        game.serverScores();
+
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
+        assertEquals("Game over", thrown.getMessage());
     }
 }
