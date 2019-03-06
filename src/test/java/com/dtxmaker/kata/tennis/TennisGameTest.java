@@ -124,17 +124,16 @@ public class TennisGameTest
     }
 
     @Test
-    public void test_S3R3S1_AdvantageServer() throws Exception
+    public void test_S1R2S2R1_Deuce() throws Exception
     {
         TennisGame game = new TennisGame();
         game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
         game.receiverScores();
         game.receiverScores();
         game.serverScores();
-        assertEquals("Advantage Server", game.getScore());
+        game.serverScores();
+        game.receiverScores();
+        assertEquals("Deuce", game.getScore());
     }
 
     @Test
@@ -150,6 +149,77 @@ public class TennisGameTest
         game.serverScores();
         game.receiverScores();
         assertEquals("Deuce", game.getScore());
+    }
+
+    @Test
+    public void test_S3R3S1_AdvantageServer() throws Exception
+    {
+        TennisGame game = new TennisGame();
+        game.serverScores();
+        game.serverScores();
+        game.serverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.serverScores();
+        assertEquals("Advantage Server", game.getScore());
+    }
+
+    @Test
+    public void test_S1R2S2R1S1_AdvantageServer() throws Exception
+    {
+        TennisGame game = new TennisGame();
+        game.serverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.serverScores();
+        game.serverScores();
+        game.receiverScores();
+        game.serverScores();
+        assertEquals("Advantage Server", game.getScore());
+    }
+
+    @Test
+    public void test_S3R4_AdvantageReceiver() throws Exception
+    {
+        TennisGame game = new TennisGame();
+        game.serverScores();
+        game.serverScores();
+        game.serverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.receiverScores();
+        assertEquals("Advantage Receiver", game.getScore());
+    }
+
+    @Test
+    public void test_S1R2S2R2_AdvantageReceiver() throws Exception
+    {
+        TennisGame game = new TennisGame();
+        game.serverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.serverScores();
+        game.serverScores();
+        game.receiverScores();
+        game.receiverScores();
+        assertEquals("Advantage Receiver", game.getScore());
+    }
+
+    @Test
+    public void test_S1R2S2R1S2_GameToServer() throws Exception
+    {
+        TennisGame game = new TennisGame();
+        game.serverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.serverScores();
+        game.serverScores();
+        game.receiverScores();
+        game.serverScores();
+        game.serverScores();
+        assertEquals("Game to Server", game.getScore());
     }
 
     @Test
@@ -170,20 +240,6 @@ public class TennisGameTest
     }
 
     @Test
-    public void test_S3R4_AdvantageReceiver() throws Exception
-    {
-        TennisGame game = new TennisGame();
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        assertEquals("Advantage Receiver", game.getScore());
-    }
-
-    @Test
     public void test_S4R1_GameOver() throws Exception
     {
         TennisGame game = new TennisGame();
@@ -201,6 +257,25 @@ public class TennisGameTest
     {
         TennisGame game = new TennisGame();
         game.receiverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.receiverScores();
+
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
+        assertEquals("Game over", thrown.getMessage());
+    }
+
+    @Test
+    public void test_S3R3S1R3S1_GameOver() throws Exception
+    {
+        TennisGame game = new TennisGame();
+        game.serverScores();
+        game.serverScores();
+        game.serverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.receiverScores();
+        game.serverScores();
         game.receiverScores();
         game.receiverScores();
         game.receiverScores();
