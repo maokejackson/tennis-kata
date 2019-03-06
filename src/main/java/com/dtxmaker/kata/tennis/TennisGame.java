@@ -5,19 +5,25 @@ import java.util.Map;
 
 public class TennisGame
 {
-    private int serverScore;
-    private int receiverScore;
+    private Player server;
+    private Player receiver;
+
+    public TennisGame(String serverName, String receiverName)
+    {
+        server = new Player(serverName);
+        receiver = new Player(receiverName);
+    }
 
     public void serverScores()
     {
         ensureGameNotOver();
-        serverScore++;
+        server.score++;
     }
 
     public void receiverScores()
     {
         ensureGameNotOver();
-        receiverScore++;
+        receiver.score++;
     }
 
     private void ensureGameNotOver()
@@ -27,33 +33,41 @@ public class TennisGame
 
     private boolean isTie()
     {
-        return serverScore >= 3 && receiverScore >= 3;
+        return server.score >= 3 && receiver.score >= 3;
+    }
+
+    private boolean isSameScore()
+    {
+        return server.score == receiver.score;
     }
 
     private boolean isDeuce()
     {
-        return isTie() && serverScore == receiverScore;
+        return isTie() && isSameScore();
     }
 
     private boolean isAdvantage()
     {
-        return isTie() && Math.abs(serverScore - receiverScore) == 1;
+        return isTie() && Math.abs(server.score - receiver.score) == 1;
     }
 
     private boolean isGame()
     {
-        return (serverScore >= 4 || receiverScore >= 4) && Math.abs(serverScore - receiverScore) >= 2;
+        return (server.score >= 4 || receiver.score >= 4) && Math.abs(server.score - receiver.score) >= 2;
+    }
+
+    private String getLeadingPlayerName()
+    {
+        return server.score >= receiver.score ? server.name : receiver.name;
     }
 
     public String getScore()
     {
-        if (isGame() && serverScore > receiverScore) return "Game to Server";
-        if (isGame() && receiverScore > serverScore) return "Game to Receiver";
+        if (isGame()) return "Game to " + getLeadingPlayerName();
+        if (isAdvantage()) return "Advantage " + getLeadingPlayerName();
         if (isDeuce()) return "Deuce";
-        if (isAdvantage() && serverScore > receiverScore) return "Advantage Server";
-        if (isAdvantage() && receiverScore > serverScore) return "Advantage Receiver";
-        if (serverScore == receiverScore) return SCORES.get(serverScore) + " All";
-        return SCORES.get(serverScore) + " " + SCORES.get(receiverScore);
+        if (isSameScore()) return SCORES.get(server.score) + "-All";
+        return SCORES.get(server.score) + "-" + SCORES.get(receiver.score);
     }
 
     private static final Map<Integer, String> SCORES = new HashMap<>();
@@ -64,5 +78,16 @@ public class TennisGame
         SCORES.put(1, "Fifteen");
         SCORES.put(2, "Thirty");
         SCORES.put(3, "Forty");
+    }
+
+    private class Player
+    {
+        private final String name;
+        private int score;
+
+        private Player(String name)
+        {
+            this.name = name;
+        }
     }
 }

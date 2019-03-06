@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TennisGameTest
 {
-    private TennisGame game = new TennisGame();
+    private TennisGame game = new TennisGame("Naomi", "Serena");
 
     @Test
     public void test_GameStart_LoveAll() throws Exception
     {
-        assertEquals("Love All", game.getScore());
+        assertEquals("Love-All", game.getScore());
     }
 
     @Test
@@ -20,7 +20,7 @@ public class TennisGameTest
     {
         game.serverScores();
 
-        assertEquals("Fifteen Love", game.getScore());
+        assertEquals("Fifteen-Love", game.getScore());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TennisGameTest
         game.serverScores();
         game.serverScores();
 
-        assertEquals("Thirty Love", game.getScore());
+        assertEquals("Thirty-Love", game.getScore());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class TennisGameTest
         game.serverScores();
         game.serverScores();
 
-        assertEquals("Forty Love", game.getScore());
+        assertEquals("Forty-Love", game.getScore());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TennisGameTest
         game.serverScores();
         game.serverScores();
 
-        assertEquals("Game to Server", game.getScore());
+        assertEquals("Game to Naomi", game.getScore());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TennisGameTest
     {
         game.receiverScores();
 
-        assertEquals("Love Fifteen", game.getScore());
+        assertEquals("Love-Fifteen", game.getScore());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class TennisGameTest
         game.receiverScores();
         game.receiverScores();
 
-        assertEquals("Love Thirty", game.getScore());
+        assertEquals("Love-Thirty", game.getScore());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class TennisGameTest
         game.receiverScores();
         game.receiverScores();
 
-        assertEquals("Love Forty", game.getScore());
+        assertEquals("Love-Forty", game.getScore());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class TennisGameTest
         game.receiverScores();
         game.receiverScores();
 
-        assertEquals("Game to Receiver", game.getScore());
+        assertEquals("Game to Serena", game.getScore());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class TennisGameTest
         game.receiverScores();
         game.serverScores();
 
-        assertEquals("Fifteen All", game.getScore());
+        assertEquals("Fifteen-All", game.getScore());
     }
 
     @Test
@@ -108,7 +108,7 @@ public class TennisGameTest
         game.receiverScores();
         game.serverScores();
 
-        assertEquals("Fifteen Forty", game.getScore());
+        assertEquals("Fifteen-Forty", game.getScore());
     }
 
     @Test
@@ -163,7 +163,7 @@ public class TennisGameTest
         game.receiverScores();
         game.serverScores();
 
-        assertEquals("Advantage Server", game.getScore());
+        assertEquals("Advantage Naomi", game.getScore());
     }
 
     @Test
@@ -177,7 +177,7 @@ public class TennisGameTest
         game.receiverScores();
         game.serverScores();
 
-        assertEquals("Advantage Server", game.getScore());
+        assertEquals("Advantage Naomi", game.getScore());
     }
 
     @Test
@@ -191,7 +191,7 @@ public class TennisGameTest
         game.receiverScores();
         game.receiverScores();
 
-        assertEquals("Advantage Receiver", game.getScore());
+        assertEquals("Advantage Serena", game.getScore());
     }
 
     @Test
@@ -205,7 +205,7 @@ public class TennisGameTest
         game.receiverScores();
         game.receiverScores();
 
-        assertEquals("Advantage Receiver", game.getScore());
+        assertEquals("Advantage Serena", game.getScore());
     }
 
     @Test
@@ -220,7 +220,7 @@ public class TennisGameTest
         game.serverScores();
         game.serverScores();
 
-        assertEquals("Game to Server", game.getScore());
+        assertEquals("Game to Naomi", game.getScore());
     }
 
     @Test
@@ -237,7 +237,7 @@ public class TennisGameTest
         game.receiverScores();
         game.receiverScores();
 
-        assertEquals("Game to Receiver", game.getScore());
+        assertEquals("Game to Serena", game.getScore());
     }
 
     @Test
