@@ -42,14 +42,7 @@ public class TennisGame
 
     private boolean isGame()
     {
-        if (isTie())
-        {
-            return Math.abs(serverScore - receiverScore) == 2;
-        }
-        else
-        {
-            return serverScore > 3 || receiverScore > 3;
-        }
+        return (serverScore >= 4 || receiverScore >= 4) && Math.abs(serverScore - receiverScore) >= 2;
     }
 
     public String getScore()
