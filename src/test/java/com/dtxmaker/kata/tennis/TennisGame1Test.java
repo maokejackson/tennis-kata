@@ -8,22 +8,42 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TennisGame1Test
 {
-    private TennisGame game = new TennisGame1("Naomi", "Serena");
+    private static final String SERVER   = "Naomi";
+    private static final String RECEIVER = "Serena";
+
+    private TennisGame game = new TennisGame1(SERVER, RECEIVER);
+
+    private void serverWinBall()
+    {
+        serverWinBalls(1);
+    }
 
     private void serverWinBalls(int balls)
     {
         for (int i = 0; i < balls; i++)
         {
-            game.serverScores();
+            game.winBall(SERVER);
         }
+    }
+
+    private void receiverWinBall()
+    {
+        receiverWinBalls(1);
     }
 
     private void receiverWinBalls(int balls)
     {
         for (int i = 0; i < balls; i++)
         {
-            game.receiverScores();
+            game.winBall(RECEIVER);
         }
+    }
+
+    @Test
+    public void test_InvalidPlayer_Error() throws Exception
+    {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> game.winBall("Foo"));
+        assertEquals("Player does not exist", thrown.getMessage());
     }
 
     @Test
@@ -215,7 +235,7 @@ public class TennisGame1Test
     {
         serverWinBalls(4);
 
-        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::receiverScores);
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, this::receiverWinBall);
         assertEquals("Game over", thrown.getMessage());
     }
 
@@ -224,7 +244,7 @@ public class TennisGame1Test
     {
         serverWinBalls(4);
 
-        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, this::serverWinBall);
         assertEquals("Game over", thrown.getMessage());
     }
 
@@ -233,7 +253,7 @@ public class TennisGame1Test
     {
         receiverWinBalls(4);
 
-        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, this::serverWinBall);
         assertEquals("Game over", thrown.getMessage());
     }
 
@@ -245,7 +265,7 @@ public class TennisGame1Test
         serverWinBalls(1);
         receiverWinBalls(3);
 
-        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, this::serverWinBall);
         assertEquals("Game over", thrown.getMessage());
     }
 }

@@ -2,9 +2,7 @@ package com.dtxmaker.kata;
 
 public interface TennisGame
 {
-    void serverScores();
-
-    void receiverScores();
+    void winBall(String playerName);
 
     String getScore();
 }

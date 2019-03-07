@@ -31,18 +31,12 @@ public class TennisGame2 implements TennisGame
     }
 
     @Override
-    public void serverScores()
+    public void winBall(String playerName)
     {
         ensureGameNotOver();
-        server.score++;
-        nextState();
-    }
-
-    @Override
-    public void receiverScores()
-    {
-        ensureGameNotOver();
-        receiver.score++;
+        if (server.name.equals(playerName)) server.score++;
+        else if (receiver.name.equals(playerName)) receiver.score++;
+        else throw new IllegalArgumentException("Player does not exist");
         nextState();
     }
 
