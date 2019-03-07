@@ -1,13 +1,14 @@
 package com.dtxmaker.kata.tennis;
 
+import com.dtxmaker.kata.TennisGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TennisGameTest
+public class TennisGame1Test
 {
-    private TennisGame game = new TennisGame("Naomi", "Serena");
+    private TennisGame game = new TennisGame1("Naomi", "Serena");
 
     private void serverWinBalls(int balls)
     {

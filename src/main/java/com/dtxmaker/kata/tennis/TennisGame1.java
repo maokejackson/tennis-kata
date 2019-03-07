@@ -1,25 +1,29 @@
 package com.dtxmaker.kata.tennis;
 
+import com.dtxmaker.kata.TennisGame;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class TennisGame
+public class TennisGame1 implements TennisGame
 {
     private Player server;
     private Player receiver;
 
-    public TennisGame(String serverName, String receiverName)
+    public TennisGame1(String serverName, String receiverName)
     {
         server = new Player(serverName);
         receiver = new Player(receiverName);
     }
 
+    @Override
     public void serverScores()
     {
         ensureGameNotOver();
         server.score++;
     }
 
+    @Override
     public void receiverScores()
     {
         ensureGameNotOver();
@@ -61,6 +65,7 @@ public class TennisGame
         return getLeadingPlayer().name;
     }
 
+    @Override
     public String getScore()
     {
         if (isGame()) return "Game to " + getLeadingPlayerName();
@@ -83,7 +88,7 @@ public class TennisGame
     private class Player
     {
         private final String name;
-        private int score;
+        private       int    score;
 
         private Player(String name)
         {
