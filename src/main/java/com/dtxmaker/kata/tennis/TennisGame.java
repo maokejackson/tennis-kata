@@ -33,22 +33,17 @@ public class TennisGame
 
     private boolean isTie()
     {
-        return server.score >= 3 && receiver.score >= 3;
-    }
-
-    private boolean isSameScore()
-    {
         return server.score == receiver.score;
     }
 
     private boolean isDeuce()
     {
-        return isTie() && isSameScore();
+        return isTie() && server.score >= 3;
     }
 
     private boolean isAdvantage()
     {
-        return isTie() && Math.abs(server.score - receiver.score) == 1;
+        return server.score >= 3 && receiver.score >= 3 && Math.abs(server.score - receiver.score) == 1;
     }
 
     private boolean isGame()
@@ -56,9 +51,14 @@ public class TennisGame
         return (server.score >= 4 || receiver.score >= 4) && Math.abs(server.score - receiver.score) >= 2;
     }
 
+    private Player getLeadingPlayer()
+    {
+        return server.score >= receiver.score ? server : receiver;
+    }
+
     private String getLeadingPlayerName()
     {
-        return server.score >= receiver.score ? server.name : receiver.name;
+        return getLeadingPlayer().name;
     }
 
     public String getScore()
@@ -66,7 +66,7 @@ public class TennisGame
         if (isGame()) return "Game to " + getLeadingPlayerName();
         if (isAdvantage()) return "Advantage " + getLeadingPlayerName();
         if (isDeuce()) return "Deuce";
-        if (isSameScore()) return SCORES.get(server.score) + "-All";
+        if (isTie()) return SCORES.get(server.score) + "-All";
         return SCORES.get(server.score) + "-" + SCORES.get(receiver.score);
     }
 

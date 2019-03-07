@@ -9,6 +9,22 @@ public class TennisGameTest
 {
     private TennisGame game = new TennisGame("Naomi", "Serena");
 
+    private void serverWinBalls(int balls)
+    {
+        for (int i = 0; i < balls; i++)
+        {
+            game.serverScores();
+        }
+    }
+
+    private void receiverWinBalls(int balls)
+    {
+        for (int i = 0; i < balls; i++)
+        {
+            game.receiverScores();
+        }
+    }
+
     @Test
     public void test_GameStart_LoveAll() throws Exception
     {
@@ -18,7 +34,7 @@ public class TennisGameTest
     @Test
     public void test_S1_FifteenLove() throws Exception
     {
-        game.serverScores();
+        serverWinBalls(1);
 
         assertEquals("Fifteen-Love", game.getScore());
     }
@@ -26,8 +42,7 @@ public class TennisGameTest
     @Test
     public void test_S2_ThirtyLove() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
+        serverWinBalls(2);
 
         assertEquals("Thirty-Love", game.getScore());
     }
@@ -35,9 +50,7 @@ public class TennisGameTest
     @Test
     public void test_S3_ThirtyLove() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
+        serverWinBalls(3);
 
         assertEquals("Forty-Love", game.getScore());
     }
@@ -45,10 +58,7 @@ public class TennisGameTest
     @Test
     public void test_S4_GameToServer() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
+        serverWinBalls(4);
 
         assertEquals("Game to Naomi", game.getScore());
     }
@@ -56,7 +66,7 @@ public class TennisGameTest
     @Test
     public void test_R1_LoveFifteen() throws Exception
     {
-        game.receiverScores();
+        receiverWinBalls(1);
 
         assertEquals("Love-Fifteen", game.getScore());
     }
@@ -64,8 +74,7 @@ public class TennisGameTest
     @Test
     public void test_R2_LoveThirty() throws Exception
     {
-        game.receiverScores();
-        game.receiverScores();
+        receiverWinBalls(2);
 
         assertEquals("Love-Thirty", game.getScore());
     }
@@ -73,9 +82,7 @@ public class TennisGameTest
     @Test
     public void test_R3_LoveForty() throws Exception
     {
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
+        receiverWinBalls(3);
 
         assertEquals("Love-Forty", game.getScore());
     }
@@ -83,10 +90,7 @@ public class TennisGameTest
     @Test
     public void test_R4_GameToReceiver() throws Exception
     {
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
+        receiverWinBalls(4);
 
         assertEquals("Game to Serena", game.getScore());
     }
@@ -94,8 +98,8 @@ public class TennisGameTest
     @Test
     public void test_R1S1_LoveFifteen() throws Exception
     {
-        game.receiverScores();
-        game.serverScores();
+        receiverWinBalls(1);
+        serverWinBalls(1);
 
         assertEquals("Fifteen-All", game.getScore());
     }
@@ -103,10 +107,8 @@ public class TennisGameTest
     @Test
     public void test_R3S1_FifteenForty() throws Exception
     {
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
+        receiverWinBalls(3);
+        serverWinBalls(1);
 
         assertEquals("Fifteen-Forty", game.getScore());
     }
@@ -114,12 +116,8 @@ public class TennisGameTest
     @Test
     public void test_S3R3_Deuce() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
+        serverWinBalls(3);
+        receiverWinBalls(3);
 
         assertEquals("Deuce", game.getScore());
     }
@@ -127,12 +125,10 @@ public class TennisGameTest
     @Test
     public void test_S1R2S2R1_Deuce() throws Exception
     {
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
+        serverWinBalls(1);
+        receiverWinBalls(2);
+        serverWinBalls(2);
+        receiverWinBalls(1);
 
         assertEquals("Deuce", game.getScore());
     }
@@ -140,14 +136,10 @@ public class TennisGameTest
     @Test
     public void test_S3R3S1R1_Deuce() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.receiverScores();
+        serverWinBalls(3);
+        receiverWinBalls(3);
+        serverWinBalls(1);
+        receiverWinBalls(1);
 
         assertEquals("Deuce", game.getScore());
     }
@@ -155,13 +147,9 @@ public class TennisGameTest
     @Test
     public void test_S3R3S1_AdvantageServer() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
+        serverWinBalls(3);
+        receiverWinBalls(3);
+        serverWinBalls(1);
 
         assertEquals("Advantage Naomi", game.getScore());
     }
@@ -169,13 +157,11 @@ public class TennisGameTest
     @Test
     public void test_S1R2S2R1S1_AdvantageServer() throws Exception
     {
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.serverScores();
+        serverWinBalls(1);
+        receiverWinBalls(2);
+        serverWinBalls(2);
+        receiverWinBalls(1);
+        serverWinBalls(1);
 
         assertEquals("Advantage Naomi", game.getScore());
     }
@@ -183,13 +169,8 @@ public class TennisGameTest
     @Test
     public void test_S3R4_AdvantageReceiver() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
+        serverWinBalls(3);
+        receiverWinBalls(4);
 
         assertEquals("Advantage Serena", game.getScore());
     }
@@ -197,13 +178,10 @@ public class TennisGameTest
     @Test
     public void test_S1R2S2R2_AdvantageReceiver() throws Exception
     {
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
+        serverWinBalls(1);
+        receiverWinBalls(2);
+        serverWinBalls(2);
+        receiverWinBalls(2);
 
         assertEquals("Advantage Serena", game.getScore());
     }
@@ -211,14 +189,11 @@ public class TennisGameTest
     @Test
     public void test_S1R2S2R1S2_GameToServer() throws Exception
     {
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.serverScores();
+        serverWinBalls(1);
+        receiverWinBalls(2);
+        serverWinBalls(2);
+        receiverWinBalls(1);
+        serverWinBalls(2);
 
         assertEquals("Game to Naomi", game.getScore());
     }
@@ -226,16 +201,10 @@ public class TennisGameTest
     @Test
     public void test_S3R3S1R3_GameToReceiver() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
+        serverWinBalls(3);
+        receiverWinBalls(3);
+        serverWinBalls(1);
+        receiverWinBalls(3);
 
         assertEquals("Game to Serena", game.getScore());
     }
@@ -243,22 +212,25 @@ public class TennisGameTest
     @Test
     public void test_S4R1_GameOver() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
+        serverWinBalls(4);
 
         IllegalStateException thrown = assertThrows(IllegalStateException.class, game::receiverScores);
         assertEquals("Game over", thrown.getMessage());
     }
 
     @Test
+    public void test_S5_GameOver() throws Exception
+    {
+        serverWinBalls(4);
+
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
+        assertEquals("Game over", thrown.getMessage());
+    }
+
+    @Test
     public void test_R4S1_GameOver() throws Exception
     {
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
+        receiverWinBalls(4);
 
         IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
         assertEquals("Game over", thrown.getMessage());
@@ -267,16 +239,10 @@ public class TennisGameTest
     @Test
     public void test_S3R3S1R3S1_GameOver() throws Exception
     {
-        game.serverScores();
-        game.serverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.serverScores();
-        game.receiverScores();
-        game.receiverScores();
-        game.receiverScores();
+        serverWinBalls(3);
+        receiverWinBalls(3);
+        serverWinBalls(1);
+        receiverWinBalls(3);
 
         IllegalStateException thrown = assertThrows(IllegalStateException.class, game::serverScores);
         assertEquals("Game over", thrown.getMessage());
