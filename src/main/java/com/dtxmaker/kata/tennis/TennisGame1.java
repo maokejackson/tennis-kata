@@ -27,7 +27,7 @@ public class TennisGame1 implements TennisGame
 
     private void ensureGameNotOver()
     {
-        if (isGame()) throw new IllegalStateException("Game over");
+        if (isGameOver()) throw new IllegalStateException("Game over");
     }
 
     private boolean isTie()
@@ -45,7 +45,7 @@ public class TennisGame1 implements TennisGame
         return server.score >= 3 && receiver.score >= 3 && Math.abs(server.score - receiver.score) == 1;
     }
 
-    private boolean isGame()
+    private boolean isGameOver()
     {
         return (server.score >= 4 || receiver.score >= 4) && Math.abs(server.score - receiver.score) >= 2;
     }
@@ -63,7 +63,7 @@ public class TennisGame1 implements TennisGame
     @Override
     public String getScore()
     {
-        if (isGame()) return "Game to " + getLeadingPlayerName();
+        if (isGameOver()) return "Game to " + getLeadingPlayerName();
         if (isAdvantage()) return "Advantage " + getLeadingPlayerName();
         if (isDeuce()) return "Deuce";
         if (isTie()) return SCORES.get(server.score) + "-All";
